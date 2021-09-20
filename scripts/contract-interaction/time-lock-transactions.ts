@@ -69,5 +69,5 @@ export async function manageTimelockTransaction(
       .executeTransaction(transaction.targetContract.address, transaction.value, 0, data, transaction.eta);
   }
   const receipt = await tx.wait();
-  return receipt.blockHash;
+  return receipt.transactionHash;
 }

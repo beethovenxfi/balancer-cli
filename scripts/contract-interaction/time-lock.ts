@@ -43,7 +43,7 @@ export async function setPendingTimelockAdmin(address: string) {
   const timelock = await ethers.getContractAt('Timelock', config.contractAddresses.Timelock);
   const tx = await timelock.connect(admin).setPendingAdmin(address);
   const receipt = await tx.wait();
-  return receipt.blockHash;
+  return receipt.transactionHash;
 }
 
 export async function acceptAdmin() {
@@ -51,7 +51,7 @@ export async function acceptAdmin() {
   const timelock = await ethers.getContractAt('Timelock', config.contractAddresses.Timelock);
   const tx = await timelock.connect(admin).acceptAdmin();
   const receipt = await tx.wait();
-  return receipt.blockHash;
+  return receipt.transactionHash;
 }
 
 export async function getTimelockAdmin() {

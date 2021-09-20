@@ -7,5 +7,5 @@ export async function setPoolPaused(poolType: PoolType, address: string, paused:
   const pool = await ethers.getContractAt(poolType, address);
   const tx = await pool.connect(admin).setPaused(paused);
   const receipt = await tx.wait();
-  return receipt.blockHash;
+  return receipt.transactionHash;
 }

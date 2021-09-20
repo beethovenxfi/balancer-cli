@@ -74,8 +74,8 @@ async function main() {
         stdout.printStepDone(`done with ${txHash}`);
       } else {
         stdout.printStep(`setting protocol swap fee percentage to ${answers.value}`);
-        await changeProtocolSwapFeePercentage(bn(answers.value * 1e16).toString());
-        stdout.printStepDone();
+        const txHash = await changeProtocolSwapFeePercentage(bn(answers.value * 1e16).toString());
+        stdout.printStepDone(`done with ${txHash}`);
       }
     });
 
@@ -102,8 +102,8 @@ async function main() {
         stdout.printStepDone(`done with tx ${txHash}`);
       } else {
         stdout.printStep(`setting protocol flash loan fee percentage to ${answers.value}`);
-        await changeProtocolFlashLoanFeePercentage(bn(answers.value * 1e16));
-        stdout.printStepDone();
+        const txHash = await changeProtocolFlashLoanFeePercentage(bn(answers.value * 1e16));
+        stdout.printStepDone(`done with ${txHash}`);
       }
     });
 

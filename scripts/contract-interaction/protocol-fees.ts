@@ -85,7 +85,7 @@ export async function changeProtocolSwapFeePercentage(feePercentage: string) {
 
   const tx = await feesCollector.connect(admin).setSwapFeePercentage(feePercentage);
   const receipt = await tx.wait();
-  return receipt.blockHash;
+  return receipt.transactionHash;
 }
 
 export async function changeProtocolFlashLoanFeePercentage(feePercentage: BigNumber) {
@@ -97,7 +97,7 @@ export async function changeProtocolFlashLoanFeePercentage(feePercentage: BigNum
 
   const tx = await feesCollector.connect(admin).setFlashLoanFeePercentage(feePercentage);
   const receipt = await tx.wait();
-  return receipt.blockHash;
+  return receipt.transactionHash;
 }
 
 export async function withdrawCollectedProtocolFees(tokens: string[], amounts: number[], recipient: string) {
@@ -109,5 +109,5 @@ export async function withdrawCollectedProtocolFees(tokens: string[], amounts: n
   );
   const tx = await feesCollector.connect(feeCollector).withdrawCollectedFees(tokens, amounts, recipient);
   const receipt = await tx.wait();
-  return receipt.blockHash;
+  return receipt.transactionHash;
 }

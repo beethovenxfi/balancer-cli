@@ -83,7 +83,7 @@ export async function manageDefaultAdmin(address: string, roleAction: RoleAction
     tx = await authorizer.connect(admin).revokeRoles(roles, address);
   }
   const receipt = await tx.wait();
-  return receipt.blockHash;
+  return receipt.transactionHash;
 }
 
 export async function manageRoles(
@@ -109,8 +109,8 @@ export async function manageRoles(
   } else {
     tx = await authorizer.connect(admin).revokeRoles(encodedRoles, grantee);
   }
-  const receipt = await tx.wait();
-  return receipt.blockHash;
+  const receipt = tx.wait();
+  return receipt.transactionHash;
 }
 
 export async function canPerform(contractName: string, contractAddress: string, granteeAddress: string, role: string) {

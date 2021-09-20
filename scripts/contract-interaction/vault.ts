@@ -13,5 +13,5 @@ export async function setVaultPaused(paused: boolean): Promise<string> {
   const vault = await ethers.getContractAt('Vault', config.contractAddresses.Vault);
   const tx = await vault.connect(admin).setPaused(paused);
   const receipt = await tx.wait();
-  return receipt.blockHash;
+  return receipt.transactionHash;
 }
