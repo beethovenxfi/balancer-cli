@@ -35,12 +35,13 @@ Current Accounts with default admin role
 - [x] grant **timelock** ProtocolFeesCollector - setSwapFeePercentage [#0x0b090b6ceacf456b17839b6119416eb7e00a62c1bfd99a32d41f4a8418eeaadb](https://ftmscan.com/tx/0x0b090b6ceacf456b17839b6119416eb7e00a62c1bfd99a32d41f4a8418eeaadb)
 - [x] grant **timelock** Vault = setAuthorizer [#0xc8228d4ba59bf5bb6f91252c8dfc438994652d10f4077c4e532e090d4566329c](https://ftmscan.com/tx/0xc8228d4ba59bf5bb6f91252c8dfc438994652d10f4077c4e532e090d4566329c)
 - [x] set protocol swap fee to 15 % [#0x2cae7dbc0ef64f4660a8befa5274177b08b66122bfc99f157904ef0c60e87cb3](https://ftmscan.com/tx/0x2cae7dbc0ef64f4660a8befa5274177b08b66122bfc99f157904ef0c60e87cb3)
-- [ ] set protocol flash loan fee to X %
+- [x] set protocol flash loan fee to 0.1 % [#0x63856e70c2f52e91cc8ecb3838298d0b8a2e0dc20f11e737fca066d6f550125c](https://ftmscan.com/tx/0x63856e70c2f52e91cc8ecb3838298d0b8a2e0dc20f11e737fca066d6f550125c)
 - [x] grant **admin** WeightedPool - setPaused [#0x06a33a06200c149f98404cac2d97ca0ec7dcfaea1e7638c5d6cefd4af0008296](https://ftmscan.com/tx/0x06a33a06200c149f98404cac2d97ca0ec7dcfaea1e7638c5d6cefd4af0008296)
 - [x] grant **admin** StablePool - setPaused [#0x161be67c1687ecca5b74be78477019f67cdaaa89f11c80810b7a0e1e499f6a87](https://ftmscan.com/tx/0x161be67c1687ecca5b74be78477019f67cdaaa89f11c80810b7a0e1e499f6a87)
 - [ ] revoke **admin** - setFlashLoanFeePercentage & setFlashLoanFeePercentage from admin
 - [ ] revoke default admin from **admin** & **deployer**
-
+- [X] set pending timelock admin to 0xca206c8c897d9930aa6e94cf03eb2e5393b65e30 [#0x300943f13368d1d07acaa9b5cce95ba155e74d27521b85d176202e233d6a8d9b](https://ftmscan.com/tx/0x300943f13368d1d07acaa9b5cce95ba155e74d27521b85d176202e233d6a8d9b)
+- [X] accept pending admin 
 ## Log
 ```shell
  beethoven-balancer-scripts git:(main) ✗ yarn authorizer manage-roles
