@@ -34,7 +34,7 @@ Current Accounts with default admin role
 - [x] grant **admin** ProtocolFeesCollector - setSwapFeePercentage [#0x1e8b7a68a5e9f384eba7d19d8c9f0803f642f998aaa9a5bdd1a778ec0ea573ad](https://ftmscan.com/tx/0x1e8b7a68a5e9f384eba7d19d8c9f0803f642f998aaa9a5bdd1a778ec0ea573ad)
 - [x] grant **timelock** ProtocolFeesCollector - setSwapFeePercentage [#0x0b090b6ceacf456b17839b6119416eb7e00a62c1bfd99a32d41f4a8418eeaadb](https://ftmscan.com/tx/0x0b090b6ceacf456b17839b6119416eb7e00a62c1bfd99a32d41f4a8418eeaadb)
 - [x] grant **timelock** Vault = setAuthorizer [#0xc8228d4ba59bf5bb6f91252c8dfc438994652d10f4077c4e532e090d4566329c](https://ftmscan.com/tx/0xc8228d4ba59bf5bb6f91252c8dfc438994652d10f4077c4e532e090d4566329c)
-- [ ] set protocol swap fee to X %
+- [x] set protocol swap fee to 15 % [#0x2cae7dbc0ef64f4660a8befa5274177b08b66122bfc99f157904ef0c60e87cb3](https://ftmscan.com/tx/0x2cae7dbc0ef64f4660a8befa5274177b08b66122bfc99f157904ef0c60e87cb3)
 - [ ] set protocol flash loan fee to X %
 - [ ] grant **admin** WeightedPool - setPaused 
 - [ ] grant **admin** StablePool - setPaused
