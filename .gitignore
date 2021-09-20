@@ -1,0 +1,26 @@
+# Logs
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+node_modules/
+
+# Yarn
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
+
+# Hardhat artifacts
+artifacts/
+cache/
+
+# Build artifacts
+dist/
+**/.env
+
+# IDE configs
+.idea

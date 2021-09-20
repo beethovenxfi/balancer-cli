@@ -1,0 +1,50 @@
+{
+  "name": "balancer-v2-scripts",
+  "version": "1.0.0",
+  "description": "Balancer V2 Vault contract and core interfaces",
+  "license": "GPL-3.0-only",
+  "homepage": "https://github.com/beethovenxfi/balancer-v2-monorepo/tree/master/pkg/vault#readme",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:beethovenxfi/balancer-v2-monorepo.git",
+    "directory": "pkg/vault"
+  },
+  "bugs": {
+    "url": "https://github.com/beethovenxfi/balancer-v2-monorepo/issues"
+  },
+  "scripts": {
+    "authorizer": "ts-node -r dotenv/config --transpile-only scripts/authorizer.ts",
+    "protocol-fees": "ts-node -r dotenv/config --transpile-only scripts/protocol-fees.ts",
+    "timelock": "ts-node -r dotenv/config --transpile-only scripts/time-lock.ts",
+    "vault": "ts-node -r dotenv/config --transpile-only scripts/vault.ts",
+    "pools": "ts-node -r dotenv/config --transpile-only scripts/pools.ts"
+  },
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.1",
+    "@nomiclabs/hardhat-waffle": "^2.0.0",
+    "@types/chai": "^4.2.12",
+    "@types/inquirer": "^8",
+    "@types/lodash": "^4.14.161",
+    "@types/mocha": "^8.0.3",
+    "@types/node": "^14.6.0",
+    "@typescript-eslint/eslint-plugin": "^4.1.1",
+    "@typescript-eslint/parser": "^4.1.1",
+    "chai": "^4.2.0",
+    "commander": "^8.2.0",
+    "decimal.js": "^10.2.1",
+    "dotenv": "^10.0.0",
+    "eslint": "^7.9.0",
+    "eslint-plugin-mocha-no-only": "^1.1.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "ethereum-waffle": "^3.0.2",
+    "ethers": "^5.4.1",
+    "execa": "^5.1.1",
+    "hardhat": "^2.4.1",
+    "inquirer": "^8.1.4",
+    "moment": "^2.29.1",
+    "prettier": "^2.1.2",
+    "ts-node": "^8.10.2",
+    "typescript": "^4.0.2"
+  },
+  "dependencies": {}
+}

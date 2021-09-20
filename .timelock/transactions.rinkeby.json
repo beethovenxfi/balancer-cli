@@ -1,0 +1,25 @@
+{
+  "1631884663-ProtocolFeesCollector-0x45384d59dA6748d7C21200c80893634d5CA980CD-setSwapFeePercentage-[100000000000000000]": {
+    "targetContract": { "name": "ProtocolFeesCollector", "address": "0x45384d59dA6748d7C21200c80893634d5CA980CD" },
+    "eta": 1631884663,
+    "value": 0,
+    "targetFunction": {
+      "identifier": "setSwapFeePercentage",
+      "args": [{ "type": "BigNumber", "hex": "0x016345785d8a0000" }]
+    },
+    "executed": false
+  },
+  "1631886865-Authorizer-0x974D3FF709D84Ba44cde3257C0B5B0b14C081Ce9-grantRoles-[0x13bc597a70ef0535a5cbe5166b9c39adc9070815ae6155dbe037614cacf64fff,0xCEE3b7cb8996AE9Cd433f68884A16b61ca8a1FD8]": {
+    "targetContract": { "name": "Authorizer", "address": "0x974D3FF709D84Ba44cde3257C0B5B0b14C081Ce9" },
+    "eta": 1631886865,
+    "value": 0,
+    "targetFunction": {
+      "identifier": "grantRoles",
+      "args": [
+        ["0x13bc597a70ef0535a5cbe5166b9c39adc9070815ae6155dbe037614cacf64fff"],
+        "0xCEE3b7cb8996AE9Cd433f68884A16b61ca8a1FD8"
+      ]
+    },
+    "executed": false
+  }
+}
