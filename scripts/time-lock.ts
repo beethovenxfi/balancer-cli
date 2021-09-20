@@ -50,8 +50,8 @@ async function main() {
         stdout.printStepDone(`done with tx ${txHash}`);
       } else {
         stdout.printStep(`set pending timelock admin to ${answers.admin}`);
-        await setPendingTimelockAdmin(answers.admin);
-        stdout.printStepDone();
+        const txHash = await setPendingTimelockAdmin(answers.admin);
+        stdout.printStepDone(`done with tx ${txHash}`);
       }
     });
 
