@@ -5,6 +5,16 @@ Usage:
 
 run `yarn install`
 
+create `.env` file with at least
+```dotenv
+MAINNET=opera
+HARDHAT_NETWORK=rinkeby
+```
+The `HARDHAT_NETWORK` defines to which network you go and is required. Add the `MAINNET` 
+to enable an additional confirmation on actions performed on the mainnet.
+
+See `hardhat.config.ts` to see how you configure the accounts for write actions
+
 see `package.json` for available scripts.
 
 ## CLI
