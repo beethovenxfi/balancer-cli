@@ -68,13 +68,14 @@ async function main() {
         },
         ...timelockQueueQuestions,
       ]);
+      const feeAmount = bn(answers.value * 1e16);
       if (answers.timelock) {
         stdout.printStep(`Queuing setting protocol swap fee percentage to ${answers.value} on eta ${answers.eta}`);
-        const txHash = await timelocked_changeProtocolSwapFeePercentage(bn(answers.value * 1e16), answers.eta, 'queue');
+        const txHash = await timelocked_changeProtocolSwapFeePercentage(feeAmount, answers.eta, 'queue');
         stdout.printStepDone(`done with ${txHash}`);
       } else {
-        stdout.printStep(`setting protocol swap fee percentage to ${answers.value}`);
-        const txHash = await changeProtocolSwapFeePercentage(bn(answers.value * 1e16).toString());
+        stdout.printStep(`setting protocol swap fee percentage to ${feeAmount}`);
+        const txHash = await changeProtocolSwapFeePercentage(feeAmount.toString());
         stdout.printStepDone(`done with ${txHash}`);
       }
     });
@@ -92,17 +93,14 @@ async function main() {
         },
         ...timelockQueueQuestions,
       ]);
+      const feeAmount = bn(answers.value * 1e16);
       if (answers.timelock) {
         stdout.printStep(`Queue setting protocol flash loan fee percentage to ${answers.value} on eta ${answers.eta}`);
-        const txHash = await timelocked_changeProtocolFlashLoanFeePercentage(
-          bn(answers.value * 1e16),
-          answers.eta,
-          'queue'
-        );
+        const txHash = await timelocked_changeProtocolFlashLoanFeePercentage(feeAmount, answers.eta, 'queue');
         stdout.printStepDone(`done with tx ${txHash}`);
       } else {
-        stdout.printStep(`setting protocol flash loan fee percentage to ${answers.value}`);
-        const txHash = await changeProtocolFlashLoanFeePercentage(bn(answers.value * 1e16));
+        stdout.printStep(`setting protocol flash loan fee percentage to ${feeAmount}`);
+        const txHash = await changeProtocolFlashLoanFeePercentage(feeAmount);
         stdout.printStepDone(`done with ${txHash}`);
       }
     });
