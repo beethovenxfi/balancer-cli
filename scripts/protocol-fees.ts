@@ -23,7 +23,7 @@ const program = new commander.Command('protocol-fees');
 async function main() {
   program
     .command('contract-address')
-    .description('list collected protocol fees')
+    .description('print contract address')
     .action(async () => {
       await printNetwork();
       stdout.printInfo(`ProtocolFeesCollector address: ${await getProtocolFeesCollectorAddress()}`);

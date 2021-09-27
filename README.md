@@ -39,7 +39,7 @@ Options:
   -h, --help                     display help for command
 
 Commands:
-  contract-address               list collected protocol fees
+  contract-address               print contract address
   list-collected-fees            list collected protocol fees
   list-fee-percentages           list protocol fee percentages
   set-swap-fee-percentage        set protocol swap fee percentage (20 => 20%)
