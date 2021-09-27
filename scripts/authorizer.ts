@@ -11,7 +11,7 @@ import {
 } from './contract-interaction/authorizer';
 import { timelockQueueQuestions } from './utils/timelock';
 import { printNetwork } from './utils/network';
-import { scriptConfig } from './utils/scriptConfig';
+import { scriptConfig } from '../cli-config';
 import { network } from 'hardhat';
 
 dotenv.config();

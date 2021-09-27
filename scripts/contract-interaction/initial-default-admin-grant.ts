@@ -1,5 +1,5 @@
 import { ethers, network } from 'hardhat';
-import { scriptConfig } from '../utils/scriptConfig';
+import { scriptConfig } from '../../cli-config';
 
 const config = scriptConfig[network.config.chainId!];
 

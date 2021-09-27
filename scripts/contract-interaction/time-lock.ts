@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 import { ethers, network } from 'hardhat';
-import { scriptConfig } from '../utils/scriptConfig';
+import { scriptConfig } from '../../cli-config';
 import { manageTimelockTransaction, TimelockTransactionAction } from './time-lock-transactions';
 import { StoredTimelockTransaction } from '../utils/timelock';
 

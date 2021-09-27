@@ -1,5 +1,5 @@
 import { ethers, network } from 'hardhat';
-import { scriptConfig, ScriptContractName } from '../utils/scriptConfig';
+import { scriptConfig, ScriptContractName } from '../../cli-config';
 import { manageTimelockTransaction, TimelockTransactionAction } from './time-lock-transactions';
 import { actionId } from '../utils/contracts';
 import { ZERO_ADDRESS } from '../utils/numbers';

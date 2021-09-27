@@ -1,5 +1,5 @@
 import { ethers, network } from 'hardhat';
-import { scriptConfig } from '../utils/scriptConfig';
+import { scriptConfig } from '../../cli-config';
 import { BigNumber } from 'ethers';
 import { manageTimelockTransaction, TimelockTransactionAction } from './time-lock-transactions';
 

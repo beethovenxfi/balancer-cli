@@ -51,8 +51,8 @@ async function main() {
     .action(async () => {
       await printNetwork();
       const { flashLoandFee, swapFee } = await getCurrentProtocolFees();
-      stdout.printInfo(`Current protocol swap fee percentage: ${swapFee.div(bn(1e16))}%`);
-      stdout.printInfo(`Current protocol flash loand fee percentage: ${flashLoandFee.div(bn(1e16))}%`);
+      stdout.printInfo(`Current protocol swap fee percentage (1e16 = 1%): ${swapFee}`);
+      stdout.printInfo(`Current protocol flash loand fee percentage (1e16 = 1%): ${flashLoandFee}`);
     });
 
   program
@@ -64,7 +64,7 @@ async function main() {
         {
           name: 'value',
           type: 'number',
-          message: 'protocol swap fee percentage',
+          message: 'protocol swap fee percentage (20 => 20%)',
         },
         ...timelockQueueQuestions,
       ]);
@@ -88,7 +88,7 @@ async function main() {
         {
           name: 'value',
           type: 'number',
-          message: 'protocol flash loan fee percentage',
+          message: 'protocol flash loan fee percentage (20 => 20%)',
         },
         ...timelockQueueQuestions,
       ]);
