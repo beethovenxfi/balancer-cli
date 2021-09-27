@@ -27,7 +27,7 @@ const storedTransactions: Record<
 
 dotenv.config();
 
-const program = new commander.Command('timelock-admin');
+const program = new commander.Command('timelock');
 
 async function main() {
   program
