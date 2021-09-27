@@ -60,7 +60,7 @@ Commands:
   accept-pending-admin  accept pending timelock admin
   current-admin         get current timelock admin
   list-settings         list current timelock settings
-  list-transactions     execute transaction
+  list-transactions     list all transaction
   execute               execute transaction
   help [command]        display help for command
 

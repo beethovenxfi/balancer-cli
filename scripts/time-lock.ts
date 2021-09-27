@@ -86,7 +86,7 @@ async function main() {
     });
   program
     .command('list-transactions')
-    .description('execute transaction')
+    .description('list all transaction')
     .action(async () => {
       await printNetwork();
       stdout.printInfo(getTimelockTransactions());
