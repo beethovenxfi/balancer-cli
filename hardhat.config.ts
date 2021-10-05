@@ -11,14 +11,11 @@ import { TASK_COMPILE } from 'hardhat/builtin-tasks/task-names';
 
 dotenv.config();
 
-const DEPLOYER_PRIVATE_KEY =
-  process.env.DEPLOYER_PRIVATE_KEY || '0000000000000000000000000000000000000000000000000000000000000000';
+const DEPLOYER = process.env.DEPLOYER || '0000000000000000000000000000000000000000000000000000000000000000';
 const INFURA_KEY = process.env.INFURA_KEY || '0000000000000000000000000000000000000000000000000000000000000000';
-const ADMIN_PRIVATE_KEY =
-  process.env.ADMIN_PRIVATE_KEY || '0000000000000000000000000000000000000000000000000000000000000000';
+const ADMIN = process.env.ADMIN || '0000000000000000000000000000000000000000000000000000000000000000';
 
-const FEE_COLLECTOR_PRIVATE_KEY =
-  process.env.FEE_COLLECTOR_PRIVATE_KEY || '0000000000000000000000000000000000000000000000000000000000000000';
+const FEE_COLLECTOR = process.env.FEE_COLLECTOR || '0000000000000000000000000000000000000000000000000000000000000000';
 
 // task(TASK_COMPILE).setAction(overrideQueryFunctions);
 
@@ -52,12 +49,12 @@ export default {
     opera: {
       chainId: 250,
       url: `https://rpc.ftm.tools/`,
-      accounts: [`0x${DEPLOYER_PRIVATE_KEY}`, `0x${ADMIN_PRIVATE_KEY}`, `0x${FEE_COLLECTOR_PRIVATE_KEY}`], // Using private key instead of mnemonic
+      accounts: [`0x${DEPLOYER}`, `0x${ADMIN}`, `0x${FEE_COLLECTOR}`], // Using private key instead of mnemonic
     },
     rinkeby: {
       chainId: 4,
       url: `https://rinkeby.infura.io/v3/${INFURA_KEY}`,
-      accounts: [`0x${DEPLOYER_PRIVATE_KEY}`, `0x${ADMIN_PRIVATE_KEY}`, `0x${FEE_COLLECTOR_PRIVATE_KEY}`], // Using private key instead of mnemonic
+      accounts: [`0x${DEPLOYER}`, `0x${ADMIN}`, `0x${FEE_COLLECTOR}`], // Using private key instead of mnemonic
       saveDeployments: true,
     },
   },
