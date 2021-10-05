@@ -21,6 +21,7 @@ cache/
 # Build artifacts
 dist/
 **/.env
+**/.DS_Store
 
 # IDE configs
 .idea

@@ -63,9 +63,9 @@ export function getTimelockTransactions() {
           storedTransactions[transactionId].targetContract.name
         } - ${storedTransactions[transactionId].targetContract.address} - ${
           storedTransactions[transactionId].targetFunction.identifier
-        } - ${storedTransactions[transactionId].targetFunction.args} - executed: ${
+        } - ${JSON.stringify(storedTransactions[transactionId].targetFunction.args)} - executed: ${
           storedTransactions[transactionId].executed
-        } ${storedTransactions[transactionId].executeTxHash}`
+        } ${storedTransactions[transactionId].executeTxHash ?? ''}`
     )
     .join('\n');
 }
