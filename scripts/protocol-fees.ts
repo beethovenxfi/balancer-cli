@@ -5,11 +5,12 @@ import { stdout } from './utils/stdOut';
 import {
   changeProtocolFlashLoanFeePercentage,
   changeProtocolSwapFeePercentage,
-  getCollectedProtocolFees,
+  printCollectedProtocolFees,
   getCurrentProtocolFees,
   timelocked_changeProtocolFlashLoanFeePercentage,
   timelocked_changeProtocolSwapFeePercentage,
   withdrawCollectedProtocolFees,
+  getCollectedProtocolFees,
 } from './contract-interaction/protocol-fees';
 import { getProtocolFeesCollectorAddress } from './contract-interaction/vault';
 import { timelockQueueQuestions } from './utils/timelock';
@@ -34,15 +35,7 @@ async function main() {
     .description('list collected protocol fees')
     .action(async () => {
       await printNetwork();
-      const answers = await inquirer.prompt([
-        {
-          name: 'tokens',
-          type: 'input',
-          message: 'comma seperated list of token addresses',
-          validate: (input) => input?.length > 0,
-        },
-      ]);
-      stdout.printInfo(`Collected protocol fees: \n ${await getCollectedProtocolFees(answers.tokens.split(','))}`);
+      await printCollectedProtocolFees();
     });
 
   program
@@ -112,12 +105,6 @@ async function main() {
       await printNetwork();
       const answers = await inquirer.prompt([
         {
-          name: 'tokens',
-          type: 'input',
-          message: 'comma seperated list of token addresses',
-          validate: (input) => input?.length > 0,
-        },
-        {
           name: 'recipient',
           type: 'input',
           message: 'address of recipient',
@@ -127,7 +114,7 @@ async function main() {
 
       stdout.printStep(`Withdrawing all collected fees`);
       const tokens = answers.tokens.split(',');
-      const tokenAmounts = await getCollectedProtocolFees(tokens);
+      const tokenAmounts = await getCollectedProtocolFees();
       const txHash = await withdrawCollectedProtocolFees(tokens, tokenAmounts, answers.recipient);
       stdout.printStepDone(`done with tx ${txHash}`);
       stdout.printStepDone();

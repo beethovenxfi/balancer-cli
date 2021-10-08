@@ -2,6 +2,7 @@ import { ethers, network } from 'hardhat';
 import { scriptConfig } from '../../cli-config';
 import { BigNumber } from 'ethers';
 import { manageTimelockTransaction, TimelockTransactionAction } from './time-lock-transactions';
+import { stdout } from '../utils/stdOut';
 
 const config = scriptConfig[network.config.chainId!];
 
@@ -15,13 +16,32 @@ export async function getCurrentProtocolFees(): Promise<{ swapFee: BigNumber; fl
     swapFee: await feesCollector.getSwapFeePercentage(),
   };
 }
-
-export async function getCollectedProtocolFees(tokens: string[]) {
+export async function getCollectedProtocolFees(): Promise<BigNumber[]> {
   const feesCollector = await ethers.getContractAt(
     'ProtocolFeesCollector',
     config.contractAddresses.ProtocolFeesCollector
   );
-  return feesCollector.getCollectedFeeAmounts(tokens);
+
+  return await feesCollector.getCollectedFeeAmounts(config.tokenAddresses.map((token) => token.address));
+}
+
+export async function printCollectedProtocolFees() {
+  const feesCollector = await ethers.getContractAt(
+    'ProtocolFeesCollector',
+    config.contractAddresses.ProtocolFeesCollector
+  );
+
+  const collectedFees: string[] = await feesCollector.getCollectedFeeAmounts(
+    config.tokenAddresses.map((token) => token.address)
+  );
+  for (let i = 0; i < collectedFees.length; i++) {
+    stdout.printInfo(
+      `${config.tokenAddresses[i].symbol}: ${ethers.utils.formatUnits(
+        collectedFees[i],
+        config.tokenAddresses[i].decimals
+      )}`
+    );
+  }
 }
 
 // swap fee percentage where 1e16 = 1%
@@ -100,7 +120,7 @@ export async function changeProtocolFlashLoanFeePercentage(feePercentage: BigNum
   return receipt.transactionHash;
 }
 
-export async function withdrawCollectedProtocolFees(tokens: string[], amounts: number[], recipient: string) {
+export async function withdrawCollectedProtocolFees(tokens: string[], amounts: BigNumber[], recipient: string) {
   const [_, _1, feeCollector] = await ethers.getSigners();
 
   const feesCollector = await ethers.getContractAt(
