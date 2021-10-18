@@ -77,13 +77,13 @@ async function main() {
         );
         stdout.printStepDone(`done with tx ${txHash}`);
       } else {
-        stdout.printStep(`grant roles ${answers.roles} for ${answers.contract} to ${answers.grantee}`);
+        stdout.printStep(`${answers.roleAction} roles ${answers.roles} for ${answers.contract} to ${answers.grantee}`);
         const txHash = await manageRoles(
           answers.contract,
           contractAddress,
           answers.roles.split(','),
           answers.grantee,
-          'grant'
+          answers.roleAction
         );
         stdout.printStepDone(`done with tx ${txHash}`);
       }

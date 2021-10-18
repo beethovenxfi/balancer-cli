@@ -3,6 +3,7 @@ import { scriptConfig, ScriptContractName } from '../../cli-config';
 import { manageTimelockTransaction, TimelockTransactionAction } from './time-lock-transactions';
 import { actionId } from '../utils/contracts';
 import { ZERO_ADDRESS } from '../utils/numbers';
+import { stdout } from '../utils/stdOut';
 
 type RoleAction = 'grant' | 'revoke';
 
@@ -71,19 +72,30 @@ export async function timelocked_manageDefaultAdmin(
   );
 }
 
-export async function manageDefaultAdmin(address: string, roleAction: RoleAction) {
+export async function manageDefaultAdmin(address: string, roleAction: RoleAction, gnosis = true) {
   const [deployer, admin] = await ethers.getSigners();
   const authorizer = await ethers.getContractAt('Authorizer', config.contractAddresses.Authorizer);
 
   const roles = [await authorizer.DEFAULT_ADMIN_ROLE()];
-  let tx;
-  if (roleAction === 'grant') {
-    tx = await authorizer.connect(admin).grantRoles(roles, address);
+
+  if (gnosis) {
+    stdout.printInfo(`\nContract: ${authorizer.address}`);
+    stdout.printInfo(
+      `Data: ${authorizer.interface.encodeFunctionData(roleAction === 'grant' ? 'grantRoles' : 'revokeRoles', [
+        roles,
+        address,
+      ])}`
+    );
   } else {
-    tx = await authorizer.connect(admin).revokeRoles(roles, address);
+    let tx;
+    if (roleAction === 'grant') {
+      tx = await authorizer.connect(admin).grantRoles(roles, address);
+    } else {
+      // tx = await authorizer.connect(admin).revokeRoles(roles, address);
+    }
+    const receipt = await tx.wait();
+    return receipt.transactionHash;
   }
-  const receipt = await tx.wait();
-  return receipt.transactionHash;
 }
 
 export async function manageRoles(
@@ -91,7 +103,8 @@ export async function manageRoles(
   contractAddress: string,
   roles: string[],
   grantee: string,
-  action: RoleAction
+  action: RoleAction,
+  gnosis = true
 ) {
   const [deployer, admin] = await ethers.getSigners();
   const authorizer = await ethers.getContractAt('Authorizer', config.contractAddresses.Authorizer);
@@ -102,15 +115,26 @@ export async function manageRoles(
   for (const role of roles) {
     encodedRoles.push(await actionId(contract, role));
   }
+  console.log(encodedRoles);
 
-  let tx;
-  if (action === 'grant') {
-    tx = await authorizer.connect(admin).grantRoles(encodedRoles, grantee);
+  if (gnosis) {
+    stdout.printInfo(`\nContract: ${authorizer.address}`);
+    stdout.printInfo(
+      `Data: ${authorizer.interface.encodeFunctionData(action === 'grant' ? 'grantRoles' : 'revokeRoles', [
+        encodedRoles,
+        grantee,
+      ])}`
+    );
   } else {
-    tx = await authorizer.connect(admin).revokeRoles(encodedRoles, grantee);
+    let tx;
+    if (action === 'grant') {
+      tx = await authorizer.connect(admin).grantRoles(encodedRoles, grantee);
+    } else {
+      tx = await authorizer.connect(admin).revokeRoles(encodedRoles, grantee);
+    }
+    const receipt = await tx.wait();
+    return receipt.transactionHash;
   }
-  const receipt = tx.wait();
-  return receipt.transactionHash;
 }
 
 export async function canPerform(contractName: string, contractAddress: string, granteeAddress: string, role: string) {

@@ -68,7 +68,7 @@ async function main() {
         stdout.printStepDone(`done with ${txHash}`);
       } else {
         stdout.printStep(`setting protocol swap fee percentage to ${feeAmount}`);
-        const txHash = await changeProtocolSwapFeePercentage(feeAmount.toString());
+        const txHash = await changeProtocolSwapFeePercentage(feeAmount);
         stdout.printStepDone(`done with ${txHash}`);
       }
     });

@@ -96,38 +96,63 @@ export async function timelocked_changeProtocolFlashLoanFeePercentage(
   );
 }
 
-export async function changeProtocolSwapFeePercentage(feePercentage: string) {
+export async function changeProtocolSwapFeePercentage(feePercentage: BigNumber, gnosis = true) {
+  const [deployer, admin] = await ethers.getSigners();
+
+  const feesCollector = await ethers.getContractAt(
+    'ProtocolFeesCollector',
+    config.contractAddresses.ProtocolFeesCollector
+  );
+
+  if (gnosis) {
+    stdout.printInfo(`\nContract: ${feesCollector.address}`);
+    stdout.printInfo(`Data: ${feesCollector.interface.encodeFunctionData('setSwapFeePercentage', [feePercentage])}`);
+  } else {
+    const tx = await feesCollector.connect(admin).setSwapFeePercentage(feePercentage);
+    const receipt = await tx.wait();
+    return receipt.transactionHash;
+  }
+}
+
+export async function changeProtocolFlashLoanFeePercentage(feePercentage: BigNumber, gnosis = true) {
   const [deployer, admin] = await ethers.getSigners();
   const feesCollector = await ethers.getContractAt(
     'ProtocolFeesCollector',
     config.contractAddresses.ProtocolFeesCollector
   );
 
-  const tx = await feesCollector.connect(admin).setSwapFeePercentage(feePercentage);
-  const receipt = await tx.wait();
-  return receipt.transactionHash;
+  if (gnosis) {
+    stdout.printInfo(`\nContract: ${feesCollector.address}`);
+    stdout.printInfo(
+      `Data: ${feesCollector.interface.encodeFunctionData('setFlashLoanFeePercentage', [feePercentage])}`
+    );
+  } else {
+    const tx = await feesCollector.connect(admin).setFlashLoanFeePercentage(feePercentage);
+    const receipt = await tx.wait();
+    return receipt.transactionHash;
+  }
 }
 
-export async function changeProtocolFlashLoanFeePercentage(feePercentage: BigNumber) {
-  const [deployer, admin] = await ethers.getSigners();
-  const feesCollector = await ethers.getContractAt(
-    'ProtocolFeesCollector',
-    config.contractAddresses.ProtocolFeesCollector
-  );
-
-  const tx = await feesCollector.connect(admin).setFlashLoanFeePercentage(feePercentage);
-  const receipt = await tx.wait();
-  return receipt.transactionHash;
-}
-
-export async function withdrawCollectedProtocolFees(tokens: string[], amounts: BigNumber[], recipient: string) {
+export async function withdrawCollectedProtocolFees(
+  tokens: string[],
+  amounts: BigNumber[],
+  recipient: string,
+  gnosis = true
+) {
   const [_, _1, feeCollector] = await ethers.getSigners();
 
   const feesCollector = await ethers.getContractAt(
     'ProtocolFeesCollector',
     config.contractAddresses.ProtocolFeesCollector
   );
-  const tx = await feesCollector.connect(feeCollector).withdrawCollectedFees(tokens, amounts, recipient);
-  const receipt = await tx.wait();
-  return receipt.transactionHash;
+  if (gnosis) {
+    stdout.printInfo(`\nContract: ${feesCollector.address}`);
+    stdout.printInfo(
+      `Data: ${feesCollector.interface.encodeFunctionData('withdrawCollectedFees', [tokens, amounts, recipient])}`
+    );
+  } else {
+    const tx = await feesCollector.connect(feeCollector).withdrawCollectedFees(tokens, amounts, recipient);
+    const receipt = await tx.wait();
+    return receipt.transactionHash;
+  }
 }
