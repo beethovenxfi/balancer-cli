@@ -49,12 +49,12 @@ export default {
     opera: {
       chainId: 250,
       url: `https://rpc.ftm.tools/`,
-      accounts: [`0x${DEPLOYER}`, `0x${ADMIN}`, `0x${FEE_COLLECTOR}`], // Using private key instead of mnemonic
+      accounts: [], // Using private key instead of mnemonic
     },
     rinkeby: {
       chainId: 4,
       url: `https://rinkeby.infura.io/v3/${INFURA_KEY}`,
-      accounts: [`0x${DEPLOYER}`, `0x${ADMIN}`, `0x${FEE_COLLECTOR}`], // Using private key instead of mnemonic
+      accounts: [], // Using private key instead of mnemonic
       saveDeployments: true,
     },
   },
