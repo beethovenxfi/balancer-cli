@@ -82,11 +82,11 @@ async function main() {
         {
           name: 'value',
           type: 'number',
-          message: 'protocol flash loan fee percentage (20 => 20%)',
+          message: 'protocol flash loan fee percentage (1 => 0.01%)',
         },
         ...timelockQueueQuestions,
       ]);
-      const feeAmount = bn(answers.value * 1e16);
+      const feeAmount = bn(answers.value * 1e14);
       if (answers.timelock) {
         stdout.printStep(`Queue setting protocol flash loan fee percentage to ${answers.value} on eta ${answers.eta}`);
         const txHash = await timelocked_changeProtocolFlashLoanFeePercentage(feeAmount, answers.eta, 'queue');
