@@ -3,7 +3,8 @@ import commander from 'commander';
 import { stdout } from './utils/stdOut';
 import inquirer from 'inquirer';
 import { printNetwork } from './utils/network';
-import { setPoolPaused } from './contract-interaction/pools';
+import { changeSwapFeePercentage, setPoolPaused } from './contract-interaction/pools';
+import { bn } from './utils/numbers';
 
 dotenv.config();
 
@@ -68,6 +69,35 @@ async function main() {
         const txHash = await setPoolPaused(answers.type, answers.address, false);
         stdout.printStepDone(`done with tx ${txHash}`);
       }
+    });
+
+  program
+    .command('set-swap-fee-percentage')
+    .description('set swap fee percentage')
+    .action(async () => {
+      await printNetwork();
+      const answers = await inquirer.prompt([
+        {
+          name: 'type',
+          type: 'list',
+          choices: ['WeightedPool', 'StablePool'],
+          message: 'pool type',
+        },
+        {
+          name: 'address',
+          type: 'input',
+          message: 'pool address',
+        },
+        {
+          name: 'value',
+          type: 'number',
+          message: 'swap fee percentage (1 => 0.0001%)',
+        },
+      ]);
+      const feeAmount = bn(answers.value * 1e12);
+      stdout.printStep(`Change swap fee for ${answers.type} on ${answers.address} to ${feeAmount.toString()}`);
+      await changeSwapFeePercentage(answers.type, answers.address, feeAmount);
+      stdout.printStepDone();
     });
 
   await program.parseAsync(process.argv);
