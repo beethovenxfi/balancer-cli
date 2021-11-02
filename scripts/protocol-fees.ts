@@ -105,6 +105,12 @@ async function main() {
       await printNetwork();
       const answers = await inquirer.prompt([
         {
+          name: 'tokens',
+          type: 'input',
+          message: 'tokens',
+        },
+
+        {
           name: 'recipient',
           type: 'input',
           message: 'address of recipient',
@@ -114,7 +120,7 @@ async function main() {
 
       stdout.printStep(`Withdrawing all collected fees`);
       const tokens = answers.tokens.split(',');
-      const tokenAmounts = await getCollectedProtocolFees();
+      const tokenAmounts = await getCollectedProtocolFees(tokens);
       const txHash = await withdrawCollectedProtocolFees(tokens, tokenAmounts, answers.recipient);
       stdout.printStepDone(`done with tx ${txHash}`);
       stdout.printStepDone();

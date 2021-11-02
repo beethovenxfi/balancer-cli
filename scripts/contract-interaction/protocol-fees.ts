@@ -16,13 +16,15 @@ export async function getCurrentProtocolFees(): Promise<{ swapFee: BigNumber; fl
     swapFee: await feesCollector.getSwapFeePercentage(),
   };
 }
-export async function getCollectedProtocolFees(): Promise<BigNumber[]> {
+export async function getCollectedProtocolFees(
+  tokens = config.tokenAddresses.map((token) => token.address)
+): Promise<BigNumber[]> {
   const feesCollector = await ethers.getContractAt(
     'ProtocolFeesCollector',
     config.contractAddresses.ProtocolFeesCollector
   );
 
-  return await feesCollector.getCollectedFeeAmounts(config.tokenAddresses.map((token) => token.address));
+  return await feesCollector.getCollectedFeeAmounts(tokens);
 }
 
 export async function printCollectedProtocolFees() {
